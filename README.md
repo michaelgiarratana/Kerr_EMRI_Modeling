@@ -73,7 +73,7 @@ The evolution is performed using Mathematica’s `NDSolve` framework with adapti
 ## Requirements
 
 - Wolfram Mathematica (version: 13.1)
-- Packages like `NumericalCalculus`` are imported to compute the GW polarizations. These functions will also be made available soon.
+- Packages like `NumericalCalculus`` are imported to compute the GW polarizations. These functions will also be made available soon (or upon request). 
 
 ---
 
