@@ -56,7 +56,9 @@ The notebook includes an animation module that:
 - Constructs a time series of orbital trajectories
 - Generates a visual animation of the inspiral evolution
 - Illustrates orbital precession and radiation-driven decay
+- Below shows an output GIF of an eccentric, inclined test-orbit around a spinning BH (using the above example input).
 
+![Orbital evolution animation](examples/KerrEccNoAxes.gif)
 
 ---
 
