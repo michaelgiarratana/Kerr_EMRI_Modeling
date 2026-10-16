@@ -1,26 +1,33 @@
-# Test Particle Orbital Evolution in Kerr Spacetime (Mathematica Notebook)
+# Kerr EMRI Modeling
 
 ## Overview
 
-This repository contains a Mathematica notebook that models the evolution of test-particle orbits around a spinning (Kerr) black hole under the influence of gravitational-wave emission.
+This repository contains Mathematica notebooks for modeling extreme-mass-ratio inspirals (EMRIs) in Kerr spacetime and exploring their gravitational-wave signals through orbital animation and sonification.
 
-The framework evolves orbital parameters in time using radiation-reaction-driven equations of motion, tracking the secular evolution of key conserved quantities and orbital elements.
+Both notebooks begin by modeling the motion of a test particle orbiting a spinning black hole. They incorporate gravitational-wave radiation reaction to evolve the orbit over time and compute the separatrix, which marks the boundary between stable bound orbits and plunge trajectories.
+
+The notebooks build on this shared orbital model to produce two different outputs:
+
+- **Orbital animation**: Visualizes the time-dependent evolution of an eccentric, inclined orbit around a Kerr black hole.
+- **Gravitational-wave sonification**: Calculates approximate gravitational-wave polarizations from the evolving orbit and converts the resulting signal into audible sound.
 
 ---
 
 ## Physical Model
 
-The system is based on a test-particle approximation in Kerr spacetime, where the secondary object evolves under dissipative effects due to gravitational radiation.
+The system uses the test-particle approximation, in which a small secondary object moves in the gravitational field of a much more massive, spinning black hole. The orbital evolution is driven by gravitational-wave emission, which causes the orbital parameters to change over time.
 
-The evolution includes:
+The model tracks the evolution of orbital quantities, including:
 
 - Orbital energy \(E(t)\)
 - Axial angular momentum \(L_z(t)\)
 - Carter constant \(Q(t)\)
 - Derived orbital elements (e.g. semi-latus rectum \(p(t)\), eccentricity \(e(t)\), inclination \(i(t)\))
 
+The evolution of these quantities determines the changing orbital trajectory and provides the input for the subsequent animation and gravitational-wave calculations.
+
 **Governing equations:**  
-[PLACEHOLDER: insert equation(s) scheme / reference paper(s) used]
+[insert equation(s) and/or reference paper(s) used]
 
 ---
 
@@ -40,31 +47,47 @@ Example: KerrRad[a = 0.9, p = 40, e = 0.9,
 
 ---
 
-## Outputs
+## Notebook 1: Orbital Animation
 
-The code evolves the system forward in time and returns:
 
-- Time series evolution of orbital constants
-- Derived orbital parameters as functions of time
+The animation notebook evolves the orbital trajectory and constructs a sequence of frames representing the orbit at successive times.
 
----
+The animation workflow:
 
-## Visualization
+- Computes the time-dependent orbital trajectory using the shared Kerr EMRI model.
+- Generates parametric plots of the orbit at successive points in the evolution.
+- Stores the resulting plots as frames in an array.
+- Uses the frames to construct an animation of the evolving orbit.
 
-The notebook includes an animation module that:
-
-- Constructs a time series of orbital trajectories
-- Generates a visual animation of the inspiral evolution
-- Illustrates orbital precession and radiation-driven decay
-- Below shows an output GIF of an eccentric, inclined test-orbit around a spinning BH (using the above example input).
+The resulting animation illustrates features such as orbital precession and radiation-reaction-driven evolution. The below example shows an eccentric, inclined test-particle orbit around a spinning black hole, using the example input above.
 
 ![Orbital evolution animation](examples/KerrEccNoAxes.gif)
 
 ---
 
+## Notebook 2: Gravitational-Wave Sonification
+
+The sonification notebook uses the same orbital evolution framework to calculate an approximate gravitational-wave signal and convert it into audio.
+
+**Gravitational Wave Calculation**
+
+After establishing the orbital evolution, the notebook calculates quantities associated with the emitted gravitational radiation. Numerical derivatives of the orbital motion are used to construct time-dependent source multipole moments, including the mass quadrupole.
+
+The time-dependent quadrupole information is then used to calculate the gravitational-wave polarizations in the relevant angular directions. The resulting, (h_+) and (h_\times), describe the two independent polarization states of the gravitational-wave signal.
+
+The calculation produces a time series of values associated with the evolving orbit.
+
+**Sonification**
+
+To make the simulated signal audible, the notebook associates the calculated strain samples with their corresponding time values and passes the time-series data to Mathematica's `ListPlay`.
+
+The playback sampling is scaled according to the mass of the binary system, allowing the simulated gravitational-wave signal to be represented as audio.
+
+---
+
 ## Numerical Methods
 
-The evolution is performed using Mathematica’s `NDSolve` framework with adaptive integration.
+The orbital evolution is computed using Mathematica's `NDSolve` framework with numerical integration. Numerical differentiation is also used in the gravitational-wave calculation.
 
 - **NOTE**: Currently, the solver does not contain a stopping condition to halt the integration. The user must run the KerrRad function and abort the evaluation to stop the integration and obtain the evolving equations. This is a topic for a future modification. 
 
@@ -72,8 +95,14 @@ The evolution is performed using Mathematica’s `NDSolve` framework with adapti
 
 ## Requirements
 
-- Wolfram Mathematica (version: 13.1)
-- Packages like `NumericalCalculus`` are imported to compute the GW polarizations. These functions will also be made available soon (or upon request). 
+- Wolfram Mathematica and its `NumericalCalculus` package
+
+---
+
+## Repository Structure
+
+- **Notebooks**: Mathematica notebooks for orbital animation and gravitational-wave sonification.
+- **Examples**: Example animations, audio files, and other generated outputs.
 
 ---
 
